@@ -3,8 +3,8 @@ package model;
 public class MStudent extends Model{
 	private String password;
 	private String grade;
-	private int applicableCredit;
-	private int currentCredit;
+//	private int applicableCredit;
+//	private int currentCredit;
 	public MStudent() {
 		
 	}
@@ -23,21 +23,21 @@ public class MStudent extends Model{
 		this.grade = grade;
 	}
 
-	public int getApplicableCredit() {
-		return applicableCredit;
-	}
-
-	public void setApplicableCredit(int applicableCredit) {
-		this.applicableCredit = applicableCredit;
-	}
-
-	public int getCurrentCredit() {
-		return currentCredit;
-	}
-
-	public void setCurrentCredit(int currentCredit) {
-		this.currentCredit = currentCredit;
-	}
+//	public int getApplicableCredit() {
+//		return applicableCredit;
+//	}
+//
+//	public void setApplicableCredit(int applicableCredit) {
+//		this.applicableCredit = applicableCredit;
+//	}
+//
+//	public int getCurrentCredit() {
+//		return currentCredit;
+//	}
+//
+//	public void setCurrentCredit(int currentCredit) {
+//		this.currentCredit = currentCredit;
+//	}
 
 	
 }

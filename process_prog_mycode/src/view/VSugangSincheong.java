@@ -6,7 +6,6 @@ import java.awt.LayoutManager;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 
-import main.VMainFrame;
 import model.MStudent;
 import view.VLectureTable.EListSetOption;
 
@@ -48,13 +47,13 @@ public class VSugangSincheong extends JPanel {
 		this.vSelectionPanel = new VSelectionPanel();
 		this.mainPanel.add(this.vSelectionPanel);
 		
-		this.vControlPanel_Miridamgi = new VControlPanel();
+		this.vControlPanel_Miridamgi = new VControlPanel(this);
 		this.mainPanel.add(this.vControlPanel_Miridamgi);
 		
 		this.vMiridamgiTable = new VLectureTable();
 		this.mainPanel.add(vMiridamgiTable);
 		
-		this.vControlPanel_Sincheong = new VControlPanel();
+		this.vControlPanel_Sincheong = new VControlPanel(this);
 		this.mainPanel.add(this.vControlPanel_Sincheong);
 		
 		this.vSincheongTable = new VLectureTable();
@@ -84,5 +83,10 @@ public class VSugangSincheong extends JPanel {
 	public void logout() {
 		parent.logout();
 		this.currentStudent = null;
+	}
+	
+	public void resetLogoutTime() {
+		this.parent.resetLogoutTime();
+		this.vToolBar.resetLogoutTime();
 	}
 }

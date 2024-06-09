@@ -2,6 +2,8 @@ package main;
 
 import java.io.IOException;
 
+import view.VMainFrame;
+
 public class Main {
 	// attribute
 	
@@ -30,6 +32,5 @@ public class Main {
 		main.initialize();
 		main.run();
 		
-		System.out.println("hello git!!!");
 	}
 }

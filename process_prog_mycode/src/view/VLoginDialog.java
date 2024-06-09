@@ -23,7 +23,6 @@ import javax.swing.JTextField;
 import constants.Constant.LoginPanel;
 import constants.Constant.MainFrame;
 import control.CIndex;
-import main.VMainFrame;
 import model.MStudent;
 
 public class VLoginDialog extends JDialog {

@@ -1,4 +1,4 @@
-package main;
+package view;
 
 import java.awt.Dimension;
 import java.awt.HeadlessException;
@@ -7,9 +7,8 @@ import java.awt.Toolkit;
 import javax.swing.JFrame;
 
 import constants.Constant.MainFrame;
+import control.CLoginTask;
 import model.MStudent;
-import view.VLoginDialog;
-import view.VSugangSincheong;
 
 public class VMainFrame extends JFrame {
 	private static final long serialVersionUID = MainFrame.VERSION_NUM;
@@ -17,6 +16,8 @@ public class VMainFrame extends JFrame {
 	// components
 	private VSugangSincheong vSugangSincheong;
 	private VLoginDialog vLoginPanel;
+	@SuppressWarnings("unused")
+	private CLoginTask cLoginTask;
 
 	public VMainFrame() throws HeadlessException {
 		super(MainFrame.TITLE);
@@ -50,6 +51,7 @@ public class VMainFrame extends JFrame {
 		this.vSugangSincheong.login(student);
 		this.add(vSugangSincheong);
 		this.paintAll(getGraphics());
+		this.cLoginTask = new CLoginTask(this);
 	}
 
 	public void logout() {
@@ -57,5 +59,12 @@ public class VMainFrame extends JFrame {
 		this.getContentPane().setBackground(this.getBackground());
 		this.repaint();
 		this.vLoginPanel.setVisible(true);
+	}
+	
+	public void resetLogoutTime() {
+		if(this.cLoginTask != null) {
+			this.cLoginTask.requestCancel();
+		}
+		this.cLoginTask = new CLoginTask(this);
 	}
 }

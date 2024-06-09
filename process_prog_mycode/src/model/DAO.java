@@ -46,7 +46,7 @@ public class DAO {
 					mIndex.setName(wordList[1]);
 					((MStudent) mIndex).setPassword(wordList[2]);
 					((MStudent) mIndex).setGrade(wordList[3]);
-					((MStudent) mIndex).setApplicableCredit(Integer.parseInt(wordList[4]));
+//					((MStudent) mIndex).setApplicableCredit(Integer.parseInt(wordList[4]));
 				}else {
 					mIndex = new MIndex();
 					mIndex.setId(Integer.parseInt(wordList[0]));

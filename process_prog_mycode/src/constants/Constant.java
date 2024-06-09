@@ -85,4 +85,7 @@ public class Constant {
 		public final static int LECTURE_ID_LEN = 4;
 		public final static int STUDENT_ID_LEN = 8;
 	}
+	public class LoginTask{
+		public final static long DELAY = 10000; //10초
+	}
 }

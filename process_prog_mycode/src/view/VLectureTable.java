@@ -14,6 +14,7 @@ import javax.swing.table.TableCellRenderer;
 import constants.Constant;
 import control.CIndex;
 import model.MLecture;
+import model.MStudent;
 import model.Model;
 
 public class VLectureTable extends JScrollPane implements IIndexTable{
@@ -40,12 +41,12 @@ public class VLectureTable extends JScrollPane implements IIndexTable{
 		for(int i : selectedIndexes) {
 			selectedList.add(this.mLectureList.get(i));
 			switch(option) {
-			case eRemove:
+			case eRemove:	// 줄때 지우는 경우
 				this.model.removeRow(i);
 				break;
-			case eBlind:
+			case eBlind:	// 줄때 회색처리로 숨기는 경우
 				this.registeredRowInfo.put(this.mLectureList.get(i).getName(), i);
-				break;
+				break;		// 줄때 아무 일도 하지 않는 경우
 			case eRemain:
 				break;
 			}
@@ -60,10 +61,10 @@ public class VLectureTable extends JScrollPane implements IIndexTable{
 	}
 	public void setSelectedList(Vector<MLecture> selectedList, EListSetOption option) {
 		switch(option) {
-		case eBlind:
+		case eBlind:	// 줄때 숨김처리 한 경우 받을때는 회색 처리만 지워줌
 			this.showSelectedList(selectedList);
 			break;
-		default: 
+		default: 		// 지운 경우는 새로 추가하고 냅둔 경우는 전부 받음
 			this.addSelectedList(selectedList, option);
 			break;
 		}
@@ -117,6 +118,28 @@ public class VLectureTable extends JScrollPane implements IIndexTable{
 		this.setViewportView(jTable);
 		
 	}
+	// 정보 저장부 -> 구현 가성비가 너무 안나올듯
+//	public VLectureTable(String filepath, MStudent student) {
+//		String[] header = new String[Constant.LectureTable.EHeader.values().length];
+//		for(int i=0; i<Constant.LectureTable.EHeader.values().length; i++) {
+//			header[i] = Constant.LectureTable.EHeader.values()[i].getTitle();
+//		}
+//		this.registeredRowInfo = new HashMap<>();
+//		//component
+//		this.mLectureList = new Vector<>();
+//		this.setInitalInfo(filepath, student);
+//		//model
+//		this.model = new DefaultTableModel(null, header);
+//		//table
+//		this.jTable = new LectureTable();
+//		//associate
+//		this.jTable.setModel(model);
+//		this.setViewportView(jTable);
+//		
+//	}
+//	private void setInitalInfo(String filepath, MStudent student) {
+//		
+//	}
 	//method
 	public void initialize() {
 		

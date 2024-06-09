@@ -25,8 +25,11 @@ public class VControlPanel extends JPanel{
 	private VLectureTable lectureTable_pretend;
 	private VLectureTable lectureTable_next;
 	
+	private VSugangSincheong parent;
+	
 	//constructor
-	public VControlPanel() {
+	public VControlPanel(VSugangSincheong vSugangSincheong) {
+		this.parent = vSugangSincheong;
 		LayoutManager layoutManager = new BoxLayout(this, BoxLayout.Y_AXIS);
 		this.setLayout(layoutManager);
 		
@@ -55,12 +58,14 @@ public class VControlPanel extends JPanel{
 		Vector<MLecture> selectedList;
 		selectedList = this.lectureTable_next.getSelectedList(this.nextSetOption);
 		this.lectureTable_pretend.setSelectedList(selectedList, this.pretendSetOption);
+		this.parent.resetLogoutTime();
 	}
 	
 	private void moveNext() {
 		Vector<MLecture> selectedList;
 		selectedList = this.lectureTable_pretend.getSelectedList(this.pretendSetOption);
 		this.lectureTable_next.setSelectedList(selectedList, this.nextSetOption);
+		this.parent.resetLogoutTime();
 	}
 	
 	private class ActionHandler implements ActionListener{
