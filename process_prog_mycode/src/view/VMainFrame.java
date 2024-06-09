@@ -7,7 +7,6 @@ import java.awt.Toolkit;
 import javax.swing.JFrame;
 
 import constants.Constant.MainFrame;
-import control.CLoginTask;
 import model.MStudent;
 
 public class VMainFrame extends JFrame {
@@ -17,7 +16,7 @@ public class VMainFrame extends JFrame {
 	private VSugangSincheong vSugangSincheong;
 	private VLoginDialog vLoginPanel;
 	@SuppressWarnings("unused")
-	private CLoginTask cLoginTask;
+	private VLoginTask cLoginTask;
 
 	public VMainFrame() throws HeadlessException {
 		super(MainFrame.TITLE);
@@ -51,7 +50,10 @@ public class VMainFrame extends JFrame {
 		this.vSugangSincheong.login(student);
 		this.add(vSugangSincheong);
 		this.paintAll(getGraphics());
-		this.cLoginTask = new CLoginTask(this);
+		if(this.cLoginTask != null) {
+			this.cLoginTask.requestCancel();
+		}
+		this.cLoginTask = new VLoginTask(this);
 	}
 
 	public void logout() {
@@ -65,6 +67,6 @@ public class VMainFrame extends JFrame {
 		if(this.cLoginTask != null) {
 			this.cLoginTask.requestCancel();
 		}
-		this.cLoginTask = new CLoginTask(this);
+		this.cLoginTask = new VLoginTask(this);
 	}
 }

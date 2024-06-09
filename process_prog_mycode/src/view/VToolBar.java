@@ -11,6 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JToolBar;
 
 import constants.Constant.LoginTask;
+import constants.Constant.ToolBar;
 import model.MStudent;
 
 public class VToolBar extends JToolBar {
@@ -28,6 +29,7 @@ public class VToolBar extends JToolBar {
 	private Thread remainTimeCalculateThread;
 	private CalculateRemainTimeRunnable calculateRemainTimeRunnable;
 	private JButton logOutButton;
+	private JButton renewalButton;
 
 	public VToolBar(VSugangSincheong parent) {
 		// association
@@ -43,15 +45,15 @@ public class VToolBar extends JToolBar {
 		gbc.gridx = 0;
 
 		// component
-		this.nameLabel = new JLabel("이름 : ");
+		this.nameLabel = new JLabel(ToolBar.NAME_LABEL);
 		this.add(nameLabel, gbc);
 		gbc.gridx++;
 
-		this.gradeLabel = new JLabel("학년 : ");
+		this.gradeLabel = new JLabel(ToolBar.GRADE_LABEL);
 		this.add(gradeLabel, gbc);
 		gbc.gridx++;
 
-		this.idLabel = new JLabel("학번 : ");
+		this.idLabel = new JLabel(ToolBar.ID_LABEL);
 		this.add(idLabel, gbc);
 		gbc.gridx++;
 
@@ -63,11 +65,16 @@ public class VToolBar extends JToolBar {
 //        this.add(applicableCreditLabel, gbc);
 //        gbc.gridx++;
 
-		this.logoutTimeLabel = new JLabel("로그인 남은 시간 : ");
+		this.logoutTimeLabel = new JLabel(ToolBar.LOGOUT_TIME_LABEL);
 		this.add(logoutTimeLabel, gbc);
 		gbc.gridx++;
 
-		this.logOutButton = new JButton("로그아웃");
+		this.renewalButton = new JButton(ToolBar.RENEWAL_LABEL);
+		this.renewalButton.addActionListener(new RenewalHandler());
+		this.add(this.renewalButton, gbc);
+		gbc.gridx++;
+		
+		this.logOutButton = new JButton(ToolBar.LOGOUT_LABEL);
 		this.logOutButton.addActionListener(new LogOutHandler());
 		this.add(this.logOutButton, gbc);
 
@@ -93,19 +100,19 @@ public class VToolBar extends JToolBar {
         long seconds = time / 1000;
         long minutes = seconds / 60;
         seconds = seconds % 60;
-		this.logoutTimeLabel.setText("로그인 남은 시간 : "+String.format("%02d:%02d", minutes, seconds));
+		this.logoutTimeLabel.setText(ToolBar.LOGOUT_TIME_LABEL+String.format(ToolBar.LOGOUT_TIME_FORMAT, minutes, seconds));
 	}
 
 	private void setStudentName(String name) {
-		this.nameLabel.setText("이름 : " + name);
+		this.nameLabel.setText(ToolBar.NAME_LABEL + name);
 	}
 
 	private void setGrade(String grad) {
-		this.gradeLabel.setText("학년 : " + grad);
+		this.gradeLabel.setText(ToolBar.GRADE_LABEL + grad);
 	}
 
 	private void setId(int id) {
-		this.idLabel.setText("학번 : " + id);
+		this.idLabel.setText(ToolBar.ID_LABEL + id);
 	}
 //    private void setCurrentCredit(int credit) {
 //    	this.currentCreditLabel.setText("신청 학점: " + credit);
@@ -120,6 +127,13 @@ public class VToolBar extends JToolBar {
 			parent.logout();
 		}
 
+	}
+	private class RenewalHandler implements ActionListener{
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			parent.resetLogoutTime();
+		}
+		
 	}
 
 	class CalculateRemainTimeRunnable implements Runnable {
@@ -136,13 +150,13 @@ public class VToolBar extends JToolBar {
                 long currentTime = System.currentTimeMillis();
                 long timeLeft = LoginTask.DELAY + this.bindTime - currentTime;
 
-				if (timeLeft <= 0) {
+				if (timeLeft <= ToolBar.TIME_OUT) {
 					break;
 				} else {
 					updateLogoutTime(timeLeft);
 				}
 				try {
-					Thread.sleep(1000);
+					Thread.sleep(ToolBar.REFRESH_TIME);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
