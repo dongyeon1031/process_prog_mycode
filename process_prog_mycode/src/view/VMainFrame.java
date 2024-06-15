@@ -15,7 +15,6 @@ public class VMainFrame extends JFrame {
 	// components
 	private VSugangSincheong vSugangSincheong;
 	private VLoginDialog vLoginPanel;
-	@SuppressWarnings("unused")
 	private VLoginTask cLoginTask;
 
 	public VMainFrame() throws HeadlessException {
@@ -50,10 +49,7 @@ public class VMainFrame extends JFrame {
 		this.vSugangSincheong.login(student);
 		this.add(vSugangSincheong);
 		this.paintAll(getGraphics());
-		if(this.cLoginTask != null) {
-			this.cLoginTask.requestCancel();
-		}
-		this.cLoginTask = new VLoginTask(this);
+		this.resetLogoutTime();
 	}
 
 	public void logout() {

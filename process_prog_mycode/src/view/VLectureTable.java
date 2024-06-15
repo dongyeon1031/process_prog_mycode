@@ -34,7 +34,6 @@ public class VLectureTable extends JScrollPane implements IIndexTable{
 //	private VLectureTable next;
 	
 	//getters and setters
-
 	public Vector<MLecture> getSelectedList(EListSetOption option){
 		int[] selectedIndexes = this.jTable.getSelectedRows();
 		Vector<MLecture> selectedList = new Vector<>();
@@ -118,7 +117,7 @@ public class VLectureTable extends JScrollPane implements IIndexTable{
 		this.setViewportView(jTable);
 		
 	}
-	// 정보 저장부 -> 구현 가성비가 너무 안나올듯
+	// 정보 저장부 -> 구현 x
 //	public VLectureTable(String filepath, MStudent student) {
 //		String[] header = new String[Constant.LectureTable.EHeader.values().length];
 //		for(int i=0; i<Constant.LectureTable.EHeader.values().length; i++) {
